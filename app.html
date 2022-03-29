@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        
+    <!-- <link rel="stylesheet" href="css.css" /> -->
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link href="css/bootstrap-4.3.1.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" />
+
+    </header>
+<body>
+
+<button id="info_on_you" type="button" onclick="getData()">info on you!</button>
+
+<button id="suppression de compte" type="button" onclick="suppr_account()">suuprimer votre compte</button>
+
+<button id="getDataUsers" type="button" onclick="getData_users()">get all_users!</button>
+
+<button id="info_on_you" type="button" onclick="getyourfriend()">get your friends</button>
+</br>
+<input type="text" placeholder="Search.." name="search">
+<button type="submit" onclick="search()"> search </button>
+
+    <div id="response">
+
+    </div>
+<p></p>
+<p style="text-align :right" id="demo"></p>
+
+
+<div class="container-fluid bg-white chatbox shadow-lg rounded">
+    <div class="row h-100">
+        <!-- Div for User Profile Left side -->
+        <div class="col-md-4 pr-0 d-none d-md-block" id="side-1">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-5 col-sm-5 col-md-2">
+                            <img id="imgProfile" src="images/pp.png" class="rounded-circle profile-pic" />
+                        </div>
+                        <div class="col-5 col-sm-5 col-md-5 col-lg-6">
+                            <div class="name" id="divChatName_username"></div>
+                            <div id="clientuserchatheader"><span id="clientuser_status" class="indicator label-success"></span>online</div>
+                        </div>
+
+                        <div class="col-2 col-sm-2 col-md-2">
+                        </div>
+                    </div>
+                </div>
+                <!--Online User List-->
+                <div class="card-header" id="onlineusers"></div>
+                <ul class="list-group list-group-flush" id="lstChat"></ul>
+            </div>
+        </div> 
+        <div class="col-md-8 pl-0" id="side-2">
+            <!--Div for error message / connection status message-->
+            <div class="alert alert-danger" id="success-alert" style="display:none">
+            </div>
+            <!-- Div for Chat message window -->
+            <div id="chatPanel" class="card" style="display:none;">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-2 col-sm-2 col-md-2 col-lg-1">
+                            <img src="images/pp.png" id="imgChat" class="rounded-circle profile-pic" />
+                        </div>
+                        <div class="col-5 col-sm-5 col-md-5 col-lg-7">
+                            <div class="name" id="divChatName_peername"></div>
+                            <div id="peeruserchatheader"><span id="peeruser_status" class="indicator label-success"></span>online</div>
+                        </div>
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-3 icon">
+                            <span class="leaveroom">
+                                <button type="button" id="leaveroom" onclick="Leaveroom()"
+                                    class="btn btn-danger btn-lg">
+                                    <span clas="leve_room">Leave Room</span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" id="messages">
+                </div>
+
+                <div class="card-footer">
+                    <div class="row" style="position:relative;">
+                        <div class="col-md-12" id="emoji" style="display:none;">
+                            <div class="tab-pane fade show active" id="smiley" aria-labelledby="home-tab">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2 col-md-1" style="cursor:pointer;">
+                            <i class="far fa-grin fa-2x" onclick="showEmojiPanel()"></i>
+                        </div>
+                        <div class="col-8 col-md-9">
+                            <input id="txtMessage" onkeyup="ChangeSendIcon(this)" type="text"
+                                onfocus="hideEmojiPanel()" placeholder="Type here"
+                                class="form-control form-rounded" />
+                        </div>
+                        <div class="col-2 col-md-1">
+                            <i id="send" class="fa fa-paper-plane fa-2x" onclick="SendMessage()" style="display:none"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Div for default window -->
+            <div id="divStart" class="text-center">
+                <h2 class="mt-3">Select any of the online friend from the list and request a chat.</h2>
+                <div>
+                    <div class="column">
+                        <img id="mainimgpic" src="images/online.png" class="main-pic" />
+                    </div>
+                    <div class="column">
+                        <img id="mainimgpic" src="images/phone.png" class="mainimgpic2" />
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+
+ <!-- Modal for incoming call -->
+ <div class="modal" id="incoming_call_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+ aria-hidden="true" data-keyboard="false"></div>
+<!-- Modal for progress -->
+<div class="modal" id="modalNotificationList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2"
+ aria-hidden="true" data-keyboard="false"></div>
+
+<script src="Scripts/jquery-3.4.1.min.js"></script>
+<script src="Scripts/popper-1.14.7.min.js"></script>
+<script src="Scripts/bootstrap-4.3.1.min.js"></script>
+<script src="Scripts/chatapp.js"></script>
+
+
+
+
+<script type="text/javascript" src="request.js">
+        </script>
+</body>
+</html>
+
