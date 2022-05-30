@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 
 <body>
-    <script>
+    <script type="module">
+        import init, { hash, second_hash } from "./pkg/chris_math.js";
         window.onload = () => {
             const navigator = document.querySelector(
                 ".container .banner .login-signup .navigator"
@@ -30,7 +31,33 @@
                 }
             });
         };
+        document.getElementById("loginForm").addEventListener("submit", async ev => {
+            ev.preventDefault();
+            await init();
+
+            let pwdDiv_in = document.getElementById("password_in");
+            let pwdHash = hash(pwdDiv_in.value);
+            //localStorage.setItem("hash", second_hash(pwdDiv_in.value));
+            //console.log(localStorage.getItem("hash"));
+            let secondHash = "value=" + second_hash(pwdDiv_in.value);
+            document.cookie = secondHash;
+            pwdDiv_in.value = pwdHash;
+            document.getElementById("loginForm").submit();
+            //await DoHashIn();
+
+        });
+        document.getElementById("signupForm").addEventListener("submit", async ev => {
+            ev.preventDefault();
+            await init();
+            let pwdDiv_up = document.getElementById("password_up");
+            let pwdHash = hash(pwdDiv_up.value);
+            pwdDiv_up.value = pwdHash;
+            document.getElementById("signupForm").submit();
+            //await DoHashIn();
+        });
+
     </script>
+
     <link rel="stylesheet" href="style_index.css" />
 
     <div class="container">
@@ -42,21 +69,21 @@
                 </div>
                 <div class="login-form active">
                     <h1>Login</h1>
-                    <form class="loginForm" action="https://yoloooo.com/signin" method="post">
+                    <form class="loginForm" id="loginForm" action="https://yoloooo.com/signin" method="post">
                         <div class="form-group">
                             <input type="username" id="username" name="username" placeholder="username">
                         </div>
                         <div class="form-group">
-                            <input type="password" id="password" name="password" placeholder="password">
+                            <input type="password" id="password_in" name="password" placeholder="password">
                         </div>
-                        <button type="submit" value="Submit">
-                  Login
-                </button>
+                        <button id="loginSubmit" type="submit" value="Submit">
+                            Login
+                        </button>
                     </form>
                 </div>
                 <div class="signup-form">
                     <h1>Sign Up</h1>
-                    <form class="signupForm" action="https://yoloooo.com/signup" method="post">
+                    <form class="signupForm" id="signupForm" action="https://yoloooo.com/signup" method="post">
                         <div class="form-group">
                             <input type="text" name="username" placeholder="Username" />
                         </div>
@@ -64,7 +91,7 @@
                             <input type="full_name" name="full_name" placeholder="full name" />
                         </div>
                         <div class="form-group">
-                            <input type="password" id="password" name="password" placeholder="Password" />
+                            <input type="password" id="password_up" name="password" placeholder="Password" />
                         </div>
 
                         <button type="submit">Sign Up</button>
